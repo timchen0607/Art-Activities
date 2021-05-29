@@ -1,24 +1,18 @@
-# art_activities
+# Art Activities
 
-## Project setup
-```
-npm install
-```
+### 專案開始
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- 20210529
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### 基本說明
 
-### Lints and fixes files
-```
-npm run lint
-```
+- 使用 Vue 3 + Vue Router
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 心得
+
+- 希望藉由這個作品熟悉使用 Vue Cli 開發。
+- 練習資料串接與資料篩選功能。
+
+### 成果展示
+
+- https://timchen0607.github.io/Art-Activities/
