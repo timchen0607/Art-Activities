@@ -9,8 +9,20 @@ body {
 }
 
 .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   width: 100%;
+  max-width: min(1200px, 95vw);
   margin: auto;
   box-sizing: border-box;
-  max-width: min(800px, 95vw);
+  & > *:nth-child(1) {
+    width: clamp(200px, 25vw, 300px);
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+  }
+  & > *:nth-child(2) {
+    flex: auto;
+  }
 }

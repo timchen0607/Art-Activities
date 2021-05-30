@@ -1,15 +1,71 @@
 <template>
-  <!-- <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div> -->
-  <header>
+  <header class="header">
     <div class="container">
-      <h1>Art Activities</h1>
-      <input type="text" />
+      <h1 class="header-title">Art Activities</h1>
+      <div class="header-search">
+        <label for="searchBar" class="header-search-label">
+          <i class="fas fa-search"></i>
+        </label>
+        <input
+          type="text"
+          class="header-search-input"
+          id="searchBar"
+          placeholder="Explore your own activities"
+        />
+      </div>
     </div>
   </header>
-  <router-view />
+  <div>
+    <div class="container">
+      <Controller />
+      <router-view />
+    </div>
+  </div>
 </template>
 
-<style lang="scss"></style>
+<script>
+import Controller from "@/components/Controller.vue";
+
+export default {
+  name: "App",
+  components: {
+    Controller,
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/_variables";
+
+.header {
+  background-color: $c_primary;
+  padding: 1rem 0;
+  color: $c_light;
+  &-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  &-search {
+    display: flex;
+    align-items: center;
+    max-width: 500px;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid $c_light;
+    &-label {
+      margin-right: 1rem;
+      font-size: 1.5rem;
+    }
+    &-input {
+      width: 100%;
+      font-size: 1.5rem;
+      color: $c_light;
+      background: none;
+      border: none;
+      outline: none;
+      &::placeholder {
+        color: $c_secondary-light;
+      }
+    }
+  }
+}
+</style>
