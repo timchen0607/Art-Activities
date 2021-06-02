@@ -18,7 +18,7 @@
         <i class="fas fa-calendar-week"></i>
         <span>辦理期間：startTime-endTime</span>
       </p>
-      <span class="actItem-gradeItem" v-for="id in 5" :key="id">grade</span>
+      <span class="actItem-gradeItem" v-for="id in 3" :key="id">grade</span>
     </div>
   </article>
 </template>

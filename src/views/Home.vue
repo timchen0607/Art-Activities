@@ -8,17 +8,20 @@
         <span>Koahsiung</span>
       </div>
     </div>
-    <ActItem></ActItem>
+    <ActItem />
+    <ActItemLoading />
   </div>
 </template>
 
 <script>
 import ActItem from "@/components/ActItem.vue";
+import ActItemLoading from "@/components/ActItemLoading.vue";
 
 export default {
   name: "Home",
   components: {
     ActItem,
+    ActItemLoading,
   },
   props: {
     dataReady: Boolean,
