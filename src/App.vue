@@ -17,9 +17,7 @@
   </header>
   <div>
     <div class="container main">
-      <div class="controller">
-        <Controller :dataReady="dataReady" />
-      </div>
+      <Controller :dataReady="dataReady" />
       <router-view :dataReady="dataReady" />
     </div>
   </div>
@@ -81,12 +79,5 @@ export default {
 }
 .main {
   align-items: stretch;
-}
-.controller {
-  height: calc(100vh - 80px);
-  @include mobile {
-    height: auto;
-    padding: 0.5rem 0;
-  }
 }
 </style>

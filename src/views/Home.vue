@@ -6,7 +6,6 @@
     <div class="tags">
       <div class="tags-item" v-for="id in 5" :key="id">
         <span>Koahsiung</span>
-        <!-- <input type="checkbox" /> -->
       </div>
     </div>
     <ActItem></ActItem>

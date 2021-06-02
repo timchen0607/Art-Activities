@@ -8,14 +8,14 @@
 html,
 body {
   color: $c_dark;
-  font-size: 16px;
+  background-color: $c_secondary-light;
   font-family: $font;
+  font-size: 16px;
   user-select: none;
 }
 
 .container {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   width: 100%;
   max-width: min(1200px, 95vw);
@@ -29,6 +29,9 @@ body {
   }
   & > *:nth-child(2) {
     flex: auto;
+  }
+  @include mobile {
+    flex-wrap: wrap;
   }
 }
 
