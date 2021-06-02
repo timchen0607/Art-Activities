@@ -8,8 +8,8 @@
         <span>Koahsiung</span>
       </div>
     </div>
-    <ActItem />
-    <ActItemLoading />
+    <ActItemLoading v-if="!dataReady" />
+    <ActItem v-else />
   </div>
 </template>
 
