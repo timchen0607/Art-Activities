@@ -16,9 +16,9 @@
     </div>
   </header>
   <div>
-    <div class="container">
+    <div class="container main">
       <Controller :dataReady="dataReady" />
-      <router-view />
+      <router-view :dataReady="dataReady" />
     </div>
   </div>
 </template>
@@ -73,5 +73,8 @@ export default {
       }
     }
   }
+}
+.main {
+  align-items: flex-start;
 }
 </style>

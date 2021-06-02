@@ -29,7 +29,7 @@
     <section class="controller">
       <h2 class="controller-title">Categories</h2>
       <div v-if="!dataReady">
-        <div class="controller-content disabled">
+        <div class="controller-content disabled" v-for="id in 5" :key="id">
           <span class="controller-check">
             <i class="fas fa-check"></i>
           </span>

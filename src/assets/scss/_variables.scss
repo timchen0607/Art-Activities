@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+@mixin mobile {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
 
 $font: "Roboto", sans-serif;
 $c_dark: #151f1f;

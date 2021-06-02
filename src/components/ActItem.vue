@@ -1,6 +1,6 @@
 <template>
   <article>
-    <img src="" alt="" />
+    <img src="https://picsum.photos/200/200?random=1" />
     <div>
       <h3>actName</h3>
       <p>description</p>

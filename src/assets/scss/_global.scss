@@ -23,7 +23,7 @@ body {
   box-sizing: border-box;
   & > *:nth-child(1) {
     width: clamp(200px, 25vw, 300px);
-    @media screen and (max-width: 767px) {
+    @include mobile {
       width: 100%;
     }
   }
