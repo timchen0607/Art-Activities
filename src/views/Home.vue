@@ -31,6 +31,7 @@ export default {
 @import "@/assets/scss/_variables.scss";
 
 .home {
+  overflow-y: scroll;
   padding: 1.5rem;
   @include mobile {
     padding: unset;
@@ -45,14 +46,14 @@ export default {
   }
 }
 .tags {
-  padding: 0.5rem 0;
-  color: $c_info;
+  display: flex;
+  flex-wrap: wrap;
   &-item {
-    display: inline-block;
+    margin: 0.5rem;
     padding: 0.5rem 1.5rem;
+    color: $c_info;
     border: 1px solid $c_info;
     border-radius: 1rem;
-    margin: 0 0.3rem;
     cursor: pointer;
   }
 }

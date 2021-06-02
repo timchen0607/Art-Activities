@@ -17,7 +17,9 @@
   </header>
   <div>
     <div class="container main">
-      <Controller :dataReady="dataReady" />
+      <div class="controller">
+        <Controller :dataReady="dataReady" />
+      </div>
       <router-view :dataReady="dataReady" />
     </div>
   </div>
@@ -44,9 +46,12 @@ export default {
 @import "@/assets/scss/_variables";
 
 .header {
+  position: sticky;
+  top: 0;
   background-color: $c_primary;
   padding: 1rem 0;
   color: $c_light;
+  z-index: 10;
   &-title {
     font-size: 2.5rem;
     font-weight: bold;
@@ -75,6 +80,13 @@ export default {
   }
 }
 .main {
-  align-items: flex-start;
+  align-items: stretch;
+}
+.controller {
+  height: calc(100vh - 80px);
+  @include mobile {
+    height: auto;
+    padding: 0.5rem 0;
+  }
 }
 </style>
