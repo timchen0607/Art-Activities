@@ -17,7 +17,7 @@
   </header>
   <div>
     <div class="container">
-      <Controller />
+      <Controller :dataReady="dataReady" />
       <router-view />
     </div>
   </div>
@@ -25,11 +25,17 @@
 
 <script>
 import Controller from "@/components/Controller.vue";
+import { ref } from "vue";
 
 export default {
   name: "App",
   components: {
     Controller,
+  },
+  setup() {
+    const dataReady = ref(false);
+
+    return { dataReady };
   },
 };
 </script>

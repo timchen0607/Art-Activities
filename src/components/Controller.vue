@@ -2,7 +2,12 @@
   <aside>
     <section class="controller">
       <h2 class="controller-title">Location</h2>
-      <select class="controller-content">
+      <select
+        class="controller-content skeleton disabled"
+        disabled
+        v-if="!dataReady"
+      ></select>
+      <select class="controller-content" v-else>
         <option value="">Taiwan</option>
         <option value="">Taiwan</option>
         <option value="">Taiwan</option>
@@ -12,32 +17,32 @@
       <h2 class="controller-title">Date</h2>
       <div class="controller-content">
         <label class="controller-dateLabel" for="startDate">from</label>
-        <input type="date" id="startDate" />
+        <input type="date" disabled v-if="!dataReady" />
+        <input type="date" id="startDate" v-else />
       </div>
       <div class="controller-content">
         <label class="controller-dateLabel" for="endDate">to</label>
-        <input type="date" id="endDate" />
+        <input type="date" disabled v-if="!dataReady" />
+        <input type="date" id="endDate" v-else />
       </div>
     </section>
     <section class="controller">
       <h2 class="controller-title">Categories</h2>
-      <div class="controller-content">
-        <span class="controller-check">
-          <i class="fas fa-check"></i>
-        </span>
-        <span>All</span>
+      <div v-if="!dataReady">
+        <div class="controller-content disabled">
+          <span class="controller-check">
+            <i class="fas fa-check"></i>
+          </span>
+          <span class="controller-check-text skeleton"></span>
+        </div>
       </div>
-      <div class="controller-content">
-        <span class="controller-check checked">
-          <i class="fas fa-check"></i>
-        </span>
-        <span>All</span>
-      </div>
-      <div class="controller-content">
-        <span class="controller-check">
-          <i class="fas fa-check"></i>
-        </span>
-        <span>All</span>
+      <div v-else>
+        <div class="controller-content">
+          <span class="controller-check">
+            <i class="fas fa-check"></i>
+          </span>
+          <span>All</span>
+        </div>
       </div>
     </section>
   </aside>
@@ -47,6 +52,9 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "Controller",
+  props: {
+    dataReady: Boolean,
+  },
 });
 </script>
 
@@ -68,6 +76,9 @@ export default defineComponent({
     margin-top: 0.5rem;
     font-size: 1.2rem;
     cursor: pointer;
+    &.disabled {
+      cursor: unset;
+    }
   }
   & input[type="date"],
   select {
@@ -96,6 +107,10 @@ export default defineComponent({
     line-height: 27px;
     background-color: $c_light;
     border-radius: 3px;
+    &-text {
+      flex: auto;
+      height: 25px;
+    }
     &.checked {
       background-color: $c_primary;
     }

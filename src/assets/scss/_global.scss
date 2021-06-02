@@ -1,4 +1,9 @@
 @import "./_variables";
+@keyframes loading {
+  to {
+    background-position: -20%;
+  }
+}
 
 html,
 body {
@@ -25,4 +30,18 @@ body {
   & > *:nth-child(2) {
     flex: auto;
   }
+}
+
+.skeleton {
+  display: block;
+  background: linear-gradient(
+      110deg,
+      transparent 40%,
+      $c_light 50%,
+      transparent 60%
+    ),
+    $c_secondary-light;
+  background-size: 200% 100%;
+  background-position: 120%;
+  animation: 1.5s loading ease-in-out infinite;
 }
