@@ -25,19 +25,27 @@
 
 <script>
 import Controller from "@/components/Controller.vue";
-import { ref } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 
-export default {
+export default defineComponent({
   name: "App",
   components: {
     Controller,
   },
   setup() {
     const dataReady = ref(false);
-
-    return { dataReady };
+    const activities = reactive([]);
+    const url =
+      "https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindFestivalTypeJ";
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => {
+        activities.push(...json);
+        dataReady.value = true;
+      });
+    return { dataReady, activities };
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
