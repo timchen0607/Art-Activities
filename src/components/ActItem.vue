@@ -27,5 +27,8 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "ActItem",
+  props: {
+    activities: Array,
+  },
 });
 </script>

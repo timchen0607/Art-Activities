@@ -69,13 +69,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "@/assets/scss/_variables";
 
-aside {
-  height: calc(100vh - 80px);
-  @include mobile {
-    height: auto;
-    padding: 0.5rem 0;
-  }
-}
 .controller {
   padding: 1.5rem;
   background-color: $c_secondary;

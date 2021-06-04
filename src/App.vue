@@ -22,7 +22,7 @@
         :location="location"
         :categories="categories"
       />
-      <router-view :dataReady="dataReady" />
+      <router-view :dataReady="dataReady" :activities="activities" />
     </div>
   </div>
 </template>

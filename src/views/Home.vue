@@ -9,7 +9,9 @@
       </div>
     </div>
     <ActItemLoading v-if="!dataReady" />
-    <ActItem v-else />
+    <article v-else>
+      <ActItem v-for="act in activities" :key="act.actId" />
+    </article>
   </div>
 </template>
 
@@ -25,6 +27,7 @@ export default {
   },
   props: {
     dataReady: Boolean,
+    activities: Array,
   },
 };
 </script>
@@ -33,10 +36,13 @@ export default {
 @import "@/assets/scss/_variables.scss";
 
 .home {
-  overflow-y: scroll;
+  height: calc(100vh - 80px);
   padding: 1.5rem;
+  box-sizing: border-box;
+  overflow-y: scroll;
   @include mobile {
-    padding: unset;
+    height: auto;
+    padding: 1.5rem 0;
   }
 }
 .overview {
