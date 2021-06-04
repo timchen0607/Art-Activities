@@ -1,8 +1,9 @@
 <template>
   <article class="actItem">
-    <div class="actItem-box">
-      <!-- <img :src="'https://picsum.photos/200/200?random=' + act.actId" /> -->
-      <img :src="'https://cloud.culture.tw/' + act.imageUrl" />
+    <div>
+      <div class="actItem-box">
+        <img :src="'https://cloud.culture.tw/' + act.imageUrl" />
+      </div>
     </div>
     <div class="actItem-content">
       <h3 class="actItem-title">{{ act.actName }}</h3>

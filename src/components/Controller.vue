@@ -19,12 +19,28 @@
       <div class="controller-content">
         <label class="controller-dateLabel" for="startDate">from</label>
         <input type="date" disabled v-if="!dataReady" />
-        <input type="date" id="startDate" v-else v-model="myFilter.start" />
+        <input
+          type="date"
+          id="startDate"
+          v-else
+          v-model.lazy="myFilter.start"
+        />
       </div>
       <div class="controller-content">
         <label class="controller-dateLabel" for="endDate">to</label>
         <input type="date" disabled v-if="!dataReady" />
-        <input type="date" id="endDate" v-else v-model="myFilter.end" />
+        <input type="date" id="endDate" v-else v-model.lazy="myFilter.end" />
+      </div>
+      <div class="controller-content">
+        <button
+          class="controller-clearDate"
+          @click="
+            myFilter.start = '';
+            myFilter.end = '';
+          "
+        >
+          Clear Date
+        </button>
       </div>
     </section>
     <section class="controller">

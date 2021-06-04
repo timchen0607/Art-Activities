@@ -1,8 +1,7 @@
 <template>
   <div class="home">
-    <p class="overview">
-      Showing <span class="overview-num">{{ activities.length }}</span> results
-      by…
+    <p class="overview" v-if="dataReady">
+      Showing <span class="overview-num">{{ showAct.length }}</span> results by…
     </p>
     <div class="tags">
       <div
@@ -30,7 +29,7 @@
     </div>
     <ActItemLoading v-if="!dataReady" />
     <article v-else>
-      <ActItem v-for="act in activities" :key="act.actId" :act="act" />
+      <ActItem v-for="act in showAct" :key="act.actId" :act="act" />
     </article>
   </div>
 </template>
@@ -48,7 +47,7 @@ export default {
   },
   props: {
     dataReady: Boolean,
-    activities: Array,
+    showAct: Array,
     filter: Object,
   },
   setup(props) {

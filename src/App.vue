@@ -28,19 +28,14 @@
         :categories="categories"
         :filter="filter"
       />
-      <router-view
-        :dataReady="dataReady"
-        :activities="activities"
-        :filter="filter"
-      />
+      <router-view :dataReady="dataReady" :showAct="showAct" :filter="filter" />
     </div>
-    {{ filter }}
   </div>
 </template>
 
 <script>
 import Controller from "@/components/Controller.vue";
-import { computed, defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, reactive, ref, watch } from "vue";
 import { data } from "@/modules/data";
 
 export default defineComponent({
@@ -51,6 +46,7 @@ export default defineComponent({
   setup() {
     const dataReady = ref(false);
     const activities = reactive([]);
+    const showAct = reactive([]);
     const location = computed(() => {
       let city = activities.map((x) => x.cityName.substr(0, 3));
       return [...new Set(city)];
@@ -77,10 +73,32 @@ export default defineComponent({
         x.grade.splice(x.grade.indexOf(""), 1);
       });
       activities.push(...json);
+      showAct.push(...json);
       dataReady.value = true;
-      console.log(activities[0]);
     });
-    return { dataReady, activities, location, categories, search, filter };
+    watch(
+      filter,
+      () => {
+        let temp = activities.filter((x) => {
+          let f = filter;
+          let flagA = x.actName.indexOf(f.search) >= 0 || !f.search;
+          let flagB = x.cityName.indexOf(f.city) >= 0 || !f.city;
+          let flagC =
+            Date.parse(f.start) - 28800000 <= Date.parse(x.endTime) || !f.start;
+          let flagD =
+            Date.parse(f.end) - 28800000 >= Date.parse(x.startTime) || !f.end;
+          let flagE = true;
+          f.grade.forEach(
+            (g) => (flagE = flagE ? x.grade.indexOf(g) >= 0 : false)
+          );
+          return flagA && flagB && flagC && flagD && flagE;
+        });
+        showAct.length = 0;
+        showAct.push(...temp);
+      },
+      { deep: true }
+    );
+    return { dataReady, showAct, location, categories, search, filter };
   },
 });
 </script>
