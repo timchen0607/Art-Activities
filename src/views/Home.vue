@@ -10,7 +10,7 @@
     </div>
     <ActItemLoading v-if="!dataReady" />
     <article v-else>
-      <ActItem v-for="act in activities" :key="act.actId" />
+      <ActItem v-for="act in activities" :key="act.actId" :act="act" />
     </article>
   </div>
 </template>

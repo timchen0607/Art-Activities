@@ -76,6 +76,13 @@ body {
   }
   &-description {
     margin: 1rem 0;
+    line-height: 1.3rem;
+    text-align: justify;
+    text-indent: 2rem;
+  }
+  &-attr {
+    font-size: 1.1rem;
+    line-height: 1.6rem;
   }
   &-gradeItem {
     display: inline-block;
