@@ -59,7 +59,7 @@ export default {
   setup(props) {
     const route = useRoute();
     const myFilter = reactive(props.filter);
-    const page = computed(() => route.params.id);
+    const page = computed(() => parseInt(route.params.id));
     const myShowAct = computed(() =>
       props.showAct.slice(
         (page.value - 1) * props.perPage,
