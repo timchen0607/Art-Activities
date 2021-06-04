@@ -29,7 +29,14 @@
     </div>
     <ActItemLoading v-if="!dataReady" />
     <article v-else>
-      <ActItem v-for="act in showAct" :key="act.actId" :act="act" />
+      <ActItem v-for="act in myShowAct" :key="act.actId" :act="act" />
+      <span v-for="num in Math.ceil(showAct.length / 5)" :key="num">
+        <router-link
+          :to="{ path: '/Page/', name: 'Home', params: { id: num } }"
+        >
+          {{ num }}
+        </router-link>
+      </span>
     </article>
   </div>
 </template>
@@ -37,7 +44,8 @@
 <script>
 import ActItem from "@/components/ActItem.vue";
 import ActItemLoading from "@/components/ActItemLoading.vue";
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
+import { useRoute } from "vue-router";
 
 export default {
   name: "Home",
@@ -47,12 +55,22 @@ export default {
   },
   props: {
     dataReady: Boolean,
+    perPage: Number,
     showAct: Array,
     filter: Object,
   },
   setup(props) {
+    const route = useRoute();
     const myFilter = reactive(props.filter);
-    return { myFilter };
+    const page = computed(() => route.params.id);
+    const myShowAct = computed(() =>
+      props.showAct.slice(
+        (page.value - 1) * props.perPage,
+        page.value * props.perPage
+      )
+    );
+    console.log(myShowAct);
+    return { myFilter, page, myShowAct };
   },
 };
 </script>

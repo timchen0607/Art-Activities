@@ -28,7 +28,12 @@
         :categories="categories"
         :filter="filter"
       />
-      <router-view :dataReady="dataReady" :showAct="showAct" :filter="filter" />
+      <router-view
+        :dataReady="dataReady"
+        :perPage="perPage"
+        :showAct="showAct"
+        :filter="filter"
+      />
     </div>
   </div>
 </template>
@@ -36,6 +41,7 @@
 <script>
 import Controller from "@/components/Controller.vue";
 import { computed, defineComponent, reactive, ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { data } from "@/modules/data";
 
 export default defineComponent({
@@ -45,6 +51,9 @@ export default defineComponent({
   },
   setup() {
     const dataReady = ref(false);
+    const route = useRoute();
+    const router = useRouter();
+    const perPage = 5;
     const activities = reactive([]);
     const showAct = reactive([]);
     const location = computed(() => {
@@ -73,11 +82,11 @@ export default defineComponent({
         x.grade.splice(x.grade.indexOf(""), 1);
       });
       activities.push(...json);
-      showAct.push(...json);
       dataReady.value = true;
     });
+
     watch(
-      filter,
+      [activities, filter],
       () => {
         let temp = activities.filter((x) => {
           let f = filter;
@@ -95,10 +104,25 @@ export default defineComponent({
         });
         showAct.length = 0;
         showAct.push(...temp);
+        let page = route.params.id - 1;
+        if (page * perPage > showAct.length) {
+          router.push({
+            name: "Home",
+            params: { id: Math.ceil(showAct.length / perPage) },
+          });
+        }
       },
       { deep: true }
     );
-    return { dataReady, showAct, location, categories, search, filter };
+    return {
+      dataReady,
+      perPage,
+      showAct,
+      location,
+      categories,
+      search,
+      filter,
+    };
   },
 });
 </script>
