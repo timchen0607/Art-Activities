@@ -1,11 +1,12 @@
 <template>
   <div class="home">
     <p class="overview">
-      Showing <span class="overview-num">15</span> results by…
+      Showing <span class="overview-num">{{ activities.length }}</span> results
+      by…
     </p>
     <div class="tags">
-      <div class="tags-item" v-for="id in 5" :key="id">
-        <span>Koahsiung</span>
+      <div class="tags-item" v-for="item in filter.grade" :key="item">
+        <span>{{ item }}</span>
       </div>
     </div>
     <ActItemLoading v-if="!dataReady" />
@@ -28,6 +29,7 @@ export default {
   props: {
     dataReady: Boolean,
     activities: Array,
+    filter: Object,
   },
 };
 </script>

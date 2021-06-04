@@ -8,6 +8,7 @@
         v-if="!dataReady"
       ></select>
       <select class="controller-content" v-else>
+        <option value="">不限</option>
         <option :value="item" v-for="item in location" :key="item">
           {{ item }}
         </option>

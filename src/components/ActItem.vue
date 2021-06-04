@@ -22,7 +22,7 @@
           {{ act.endTime.substring(0, 12) }}
         </span>
       </p>
-      <span class="actItem-gradeItem" v-for="item in grade" :key="item">
+      <span class="actItem-gradeItem" v-for="item in act.grade" :key="item">
         {{ item }}
       </span>
     </div>
@@ -30,25 +30,14 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from "vue";
+import { defineComponent } from "vue";
 export default defineComponent({
   name: "ActItem",
   props: {
     act: Object,
   },
-  setup(props) {
-    const grade = reactive([
-      ...new Set([
-        props.act.grade1,
-        props.act.grade2,
-        props.act.grade3,
-        props.act.grade4,
-        props.act.grade5,
-      ]),
-    ]);
-    grade.splice(grade.indexOf(""), 1);
-
-    return { grade };
+  setup() {
+    return {};
   },
 });
 </script>

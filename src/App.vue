@@ -21,9 +21,15 @@
         :dataReady="dataReady"
         :location="location"
         :categories="categories"
+        :filter="filter"
       />
-      <router-view :dataReady="dataReady" :activities="activities" />
+      <router-view
+        :dataReady="dataReady"
+        :activities="activities"
+        :filter="filter"
+      />
     </div>
+    {{ filter }}
   </div>
 </template>
 
@@ -46,20 +52,29 @@ export default defineComponent({
     });
     const categories = computed(() => {
       let grade = [];
-      activities.forEach((x) =>
-        grade.push(x.grade1, x.grade2, x.grade3, x.grade4, x.grade5)
-      );
-      grade = [...new Set(grade)];
-      grade.splice(grade.indexOf(""), 1);
-      return grade;
+      activities.forEach((x) => grade.push(...x.grade));
+      return [...new Set(grade)];
+    });
+    const filter = reactive({
+      search: "",
+      city: "",
+      start: "",
+      end: "",
+      grade: [],
     });
 
     data().then((json) => {
+      json.forEach((x) => {
+        x.grade = [
+          ...new Set([x.grade1, x.grade2, x.grade3, x.grade4, x.grade5]),
+        ];
+        x.grade.splice(x.grade.indexOf(""), 1);
+      });
       activities.push(...json);
       dataReady.value = true;
       console.log(activities[0]);
     });
-    return { dataReady, activities, location, categories };
+    return { dataReady, activities, location, categories, filter };
   },
 });
 </script>
