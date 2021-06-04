@@ -7,7 +7,7 @@
         disabled
         v-if="!dataReady"
       ></select>
-      <select class="controller-content" v-else>
+      <select class="controller-content" v-else v-model="myFilter.city">
         <option value="">不限</option>
         <option :value="item" v-for="item in location" :key="item">
           {{ item }}
@@ -19,12 +19,12 @@
       <div class="controller-content">
         <label class="controller-dateLabel" for="startDate">from</label>
         <input type="date" disabled v-if="!dataReady" />
-        <input type="date" id="startDate" v-else />
+        <input type="date" id="startDate" v-else v-model="myFilter.start" />
       </div>
       <div class="controller-content">
         <label class="controller-dateLabel" for="endDate">to</label>
         <input type="date" disabled v-if="!dataReady" />
-        <input type="date" id="endDate" v-else />
+        <input type="date" id="endDate" v-else v-model="myFilter.end" />
       </div>
     </section>
     <section class="controller">
@@ -38,17 +38,33 @@
         </div>
       </div>
       <div v-else>
-        <div class="controller-content">
-          <span class="controller-check checked">
+        <div class="controller-content" @click="myFilter.grade.length = 0">
+          <span
+            :class="[
+              'controller-check',
+              { checked: myFilter.grade.length === 0 },
+            ]"
+          >
             <i class="fas fa-check"></i>
           </span>
           <span>不限</span>
         </div>
         <div class="controller-content" v-for="item in categories" :key="item">
-          <span class="controller-check">
+          <span
+            :class="[
+              'controller-check',
+              { checked: myFilter.grade.indexOf(item) >= 0 },
+            ]"
+          >
             <i class="fas fa-check"></i>
           </span>
           <span>{{ item }}</span>
+          <input
+            type="checkbox"
+            class="controller-checkbox"
+            :value="item"
+            v-model="myFilter.grade"
+          />
         </div>
       </div>
     </section>
@@ -56,76 +72,18 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 export default defineComponent({
   name: "Controller",
   props: {
     dataReady: Boolean,
     location: Array,
     categories: Array,
+    filter: Object,
+  },
+  setup(props) {
+    const myFilter = reactive(props.filter);
+    return { myFilter };
   },
 });
 </script>
-
-<style lang="scss" scoped>
-@import "@/assets/scss/_variables";
-
-.controller {
-  padding: 1.5rem;
-  background-color: $c_secondary;
-  &-title {
-    color: $c_dark;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  &-content {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-top: 0.5rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    &.disabled {
-      cursor: unset;
-    }
-  }
-  & input[type="date"],
-  select {
-    width: 100%;
-    padding: 0.3rem;
-    font-size: 1.2rem;
-    border: none;
-    outline: none;
-  }
-  &-dateLabel {
-    display: inline-block;
-    width: 5rem;
-    padding-right: 0.7rem;
-    text-align: right;
-    box-sizing: border-box;
-    cursor: pointer;
-  }
-  &-check {
-    width: 25px;
-    height: 25px;
-    margin-right: 1rem;
-    color: $c_light;
-    font-size: 1rem;
-    font-weight: unset;
-    text-align: center;
-    line-height: 27px;
-    background-color: $c_light;
-    border-radius: 3px;
-    &-text {
-      flex: auto;
-      height: 25px;
-    }
-    &.checked {
-      background-color: $c_primary;
-    }
-  }
-}
-.controller + .controller {
-  border-top: 1px solid $c_secondary-light;
-}
-</style>

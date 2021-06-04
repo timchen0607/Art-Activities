@@ -11,6 +11,11 @@
           class="header-search-input"
           id="searchBar"
           placeholder="Explore your own activities"
+          v-model="search"
+          @keyup.enter="
+            filter.search = search;
+            search = '';
+          "
         />
       </div>
     </div>
@@ -55,6 +60,7 @@ export default defineComponent({
       activities.forEach((x) => grade.push(...x.grade));
       return [...new Set(grade)];
     });
+    const search = ref("");
     const filter = reactive({
       search: "",
       city: "",
@@ -74,7 +80,7 @@ export default defineComponent({
       dataReady.value = true;
       console.log(activities[0]);
     });
-    return { dataReady, activities, location, categories, filter };
+    return { dataReady, activities, location, categories, search, filter };
   },
 });
 </script>
