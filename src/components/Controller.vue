@@ -8,9 +8,9 @@
         v-if="!dataReady"
       ></select>
       <select class="controller-content" v-else>
-        <option value="">Taiwan</option>
-        <option value="">Taiwan</option>
-        <option value="">Taiwan</option>
+        <option :value="item" v-for="item in location" :key="item">
+          {{ item }}
+        </option>
       </select>
     </section>
     <section class="controller">
@@ -54,6 +54,7 @@ export default defineComponent({
   name: "Controller",
   props: {
     dataReady: Boolean,
+    location: Array,
   },
 });
 </script>

@@ -17,15 +17,17 @@
   </header>
   <div>
     <div class="container main">
-      <Controller :dataReady="dataReady" />
+      <Controller :dataReady="dataReady" :location="location" />
       <router-view :dataReady="dataReady" />
+      {{ categories }}
     </div>
   </div>
 </template>
 
 <script>
 import Controller from "@/components/Controller.vue";
-import { defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, reactive, ref } from "vue";
+import { data } from "@/modules/data";
 
 export default defineComponent({
   name: "App",
@@ -35,15 +37,21 @@ export default defineComponent({
   setup() {
     const dataReady = ref(false);
     const activities = reactive([]);
-    const url =
-      "https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindFestivalTypeJ";
-    fetch(url)
-      .then((res) => res.json())
-      .then((json) => {
-        activities.push(...json);
-        dataReady.value = true;
-      });
-    return { dataReady, activities };
+    const location = computed(() => {
+      let city = activities.map((x) => x.cityName.substr(0, 3));
+      return [...new Set(city)];
+    });
+    const categories = computed(() => {
+      let grade = activities.map((x) => x.grade1);
+      return [...new Set(grade)];
+    });
+
+    data().then((json) => {
+      activities.push(...json);
+      dataReady.value = true;
+      console.log(activities[0]);
+    });
+    return { dataReady, activities, location, categories };
   },
 });
 </script>
