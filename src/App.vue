@@ -17,9 +17,12 @@
   </header>
   <div>
     <div class="container main">
-      <Controller :dataReady="dataReady" :location="location" />
+      <Controller
+        :dataReady="dataReady"
+        :location="location"
+        :categories="categories"
+      />
       <router-view :dataReady="dataReady" />
-      {{ categories }}
     </div>
   </div>
 </template>
@@ -42,8 +45,13 @@ export default defineComponent({
       return [...new Set(city)];
     });
     const categories = computed(() => {
-      let grade = activities.map((x) => x.grade1);
-      return [...new Set(grade)];
+      let grade = [];
+      activities.forEach((x) =>
+        grade.push(x.grade1, x.grade2, x.grade3, x.grade4, x.grade5)
+      );
+      grade = [...new Set(grade)];
+      grade.splice(grade.indexOf(""), 1);
+      return grade;
     });
 
     data().then((json) => {

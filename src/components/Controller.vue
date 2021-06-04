@@ -38,10 +38,16 @@
       </div>
       <div v-else>
         <div class="controller-content">
+          <span class="controller-check checked">
+            <i class="fas fa-check"></i>
+          </span>
+          <span>不限</span>
+        </div>
+        <div class="controller-content" v-for="item in categories" :key="item">
           <span class="controller-check">
             <i class="fas fa-check"></i>
           </span>
-          <span>All</span>
+          <span>{{ item }}</span>
         </div>
       </div>
     </section>
@@ -55,6 +61,7 @@ export default defineComponent({
   props: {
     dataReady: Boolean,
     location: Array,
+    categories: Array,
   },
 });
 </script>
